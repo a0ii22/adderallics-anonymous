@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: adguardhome
+  name: adguardhome
+spec:
+  ports:
+    - name: "53"
+      port: 53
+      targetPort: 53
+    - name: 53-udp
+      port: 53
+      protocol: UDP
+      targetPort: 53
+    - name: "784"
+      port: 784
+      protocol: UDP
+      targetPort: 784
+    - name: "853"
+      port: 853
+      targetPort: 853
+    - name: "3000"
+      port: 3000
+      targetPort: 3000
+    - name: "83"
+      port: 83
+      targetPort: 80
+  selector:
+    io.kompose.service: adguardhome
+status:
+  loadBalancer: {}

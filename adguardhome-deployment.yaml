@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: adguardhome
+  name: adguardhome
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: adguardhome
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/documents-default: "true"
+        io.kompose.service: adguardhome
+    spec:
+      containers:
+        - image: b4lduin/adguard-unbound
+          name: aegis
+          ports:
+            - containerPort: 53
+            - containerPort: 53
+              protocol: UDP
+            - containerPort: 784
+              protocol: UDP
+            - containerPort: 853
+            - containerPort: 3000
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+status: {}
